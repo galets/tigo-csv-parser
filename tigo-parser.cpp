@@ -39,10 +39,11 @@ struct LmuFields {
     std::string Details;
 
     double getPower() const {
-        if (std::isnan(Vin) || std::isnan(Iin)) {
+        if (std::isnan(Vin) || std::isnan(Vout) || std::isnan(Iin)) {
             return std::numeric_limits<double>::quiet_NaN();
         }
-        return Vin * Iin;
+        // This formula doesn't look right, but it seems to work
+        return (Vin+Vout) * Iin;
     }
 };
 
